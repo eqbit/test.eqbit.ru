@@ -1,5 +1,4 @@
-<?php
-function create_post_type_portfolio() {
+<?php function create_post_type_portfolio() {
     
     register_post_type( 'portfolio',
         array(

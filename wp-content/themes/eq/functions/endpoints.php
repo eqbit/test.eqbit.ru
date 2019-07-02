@@ -1,6 +1,4 @@
-<?
-
-function portfolio_endpoint($request_data) {
+<?php function portfolio_endpoint($request_data) {
     $posts_per_page = 7;
     
     $args = array(
