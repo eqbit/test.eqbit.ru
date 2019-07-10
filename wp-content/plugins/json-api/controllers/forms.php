@@ -38,12 +38,66 @@ class JSON_API_Forms_Controller {
         $content .= "Телефон: " .$phone. "\n";
         
         if($site) {
-            $content .= "Сайт: " .$site;
+            $content .= "Сайт: " .$site. "\n";
         }
         
         if($email) {
             $content .= "Email: " .$email;
         }
+    
+        return  wp_insert_post(array(
+            'post_title'=>$title,
+            'post_type'=>'forms',
+            'post_content'=>$content,
+            'post_status' => 'publish'
+        ));
+    }
+    
+    private function submit_brief($query) {
+        $title = "Бриф";
+        $name = $query->name;
+        $phone = $query->phone;
+        $type = $query->type;
+        $budget = $query->budget;
+        $task = $query->task;
+        $from = $query->from;
+        $file = $_FILES["file"];
+    
+        $content = "";
+        $content .= "Имя: " .$name. "\n";
+        $content .= "Телефон: " .$phone. "\n";
+    
+        if($type) {
+            $content .= "Тип проекта: " .$type. "\n";
+        }
+    
+        if($budget) {
+            $content .= "Бюджет: " .$budget. "\n";
+        }
+    
+        if($task) {
+            $content .= "\n\nЗадача: " .$task. "\n\n";
+        }
+    
+        if($from) {
+            $content .= "Откуда узнали: " .$from. "\n";
+        }
+    
+        if($file) {
+            $filePath = wp_upload_bits(
+                time().$file["name"],
+                null,
+                file_get_contents($file["tmp_name"])
+            )["url"];
+    
+            $content .= "\n\nФайл: " .$filePath;
+        }
+        
+        $headers = array(
+            'From: Robot <notification.service@wp.web-dev-studio.ru>'
+        );
+    
+        wp_mail( 'eqbits@gmail.com', 'Заполнен бриф на web/dev', $content, $headers );
     
         return  wp_insert_post(array(
             'post_title'=>$title,
