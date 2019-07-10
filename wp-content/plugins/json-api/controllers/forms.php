@@ -94,10 +94,10 @@ class JSON_API_Forms_Controller {
         }
         
         $headers = array(
-            'From: Robot <notification.service@wp.web-dev-studio.ru>'
+            'From: Admin <service@web-dev-studio.ru>'
         );
     
-        wp_mail( 'eqbits@gmail.com', 'Заполнен бриф на web/dev', $content, $headers );
+        wp_mail( 'eqbit@yandex.ru', 'Заполнен бриф на web/dev', $content, $headers );
     
         return  wp_insert_post(array(
             'post_title'=>$title,
