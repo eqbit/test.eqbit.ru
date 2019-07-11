@@ -107,9 +107,9 @@ class JSON_API_Forms_Controller {
     
     private function mail($title, $content) {
         $headers = array(
-            'From: Notification service <service@web-dev-studio.ru>'
+            'From: Сервис уведомлений WEB/DEV <service@web-dev-studio.ru>'
         );
     
-        wp_mail( 'eqbits@gmail.com, web.d3v@yandex.ru, eqbit@yandex.ru', $title, $content, $headers );
+        wp_mail( 'eqbits@gmail.com, web.d3v@yandex.ru', $title, $content, $headers );
     }
 }
