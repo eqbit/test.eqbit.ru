@@ -45,6 +45,8 @@ class JSON_API_Forms_Controller {
             $content .= "Email: " .$email;
         }
     
+        $this->mail($title. ' на web/dev', $content);
+    
         return  wp_insert_post(array(
             'post_title'=>$title,
             'post_type'=>'forms',
@@ -93,11 +95,7 @@ class JSON_API_Forms_Controller {
             $content .= "\n\nФайл: " .$filePath;
         }
         
-        $headers = array(
-            'From: Admin <service@web-dev-studio.ru>'
-        );
-    
-        wp_mail( 'eqbit@yandex.ru', 'Заполнен бриф на web/dev', $content, $headers );
+        $this->mail('Заполнен бриф на web/dev', $content);
     
         return  wp_insert_post(array(
             'post_title'=>$title,
@@ -105,5 +103,13 @@ class JSON_API_Forms_Controller {
             'post_content'=>$content,
             'post_status' => 'publish'
         ));
+    }
+    
+    private function mail($title, $content) {
+        $headers = array(
+            'From: Notification service <service@web-dev-studio.ru>'
+        );
+    
+        wp_mail( 'eqbits@gmail.com, web.d3v@yandex.ru, eqbit@yandex.ru', $title, $content, $headers );
     }
 }
